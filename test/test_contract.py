@@ -10,10 +10,12 @@ stub_host = "127.0.0.1"
 stub_port = 8080
 specmatic_json_file = ROOT_DIR + '/specmatic.json'
 expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
+service_contract_file = ROOT_DIR + '/test/spec/product-search-bff-api.yaml'
+stub_contract_file = ROOT_DIR + '/test/spec/order_api_spec.yaml'
 
 
-@specmatic_contract_test(host, port)
-@specmatic_stub(stub_host, stub_port, [expectation_json_file])
+@specmatic_contract_test(host, port, '', service_contract_file)
+@specmatic_stub(stub_host, stub_port, [expectation_json_file], '', stub_contract_file)
 class TestApiContract:
     @classmethod
     def teardown_class(cls):
