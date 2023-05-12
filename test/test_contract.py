@@ -14,11 +14,9 @@ expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
 
 @specmatic_contract_test(host, port)
 @specmatic_stub(stub_host, stub_port, [expectation_json_file])
-@start_flask_app(app, host, port)
 class TestApiContract:
     @classmethod
     def teardown_class(cls):
-        cls.flask_server.stop()
         cls.stub.stop()
 
 
