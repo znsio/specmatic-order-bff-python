@@ -16,9 +16,11 @@ stub_contract_file = ROOT_DIR + '/test/spec/order_api_spec.yaml'
 
 @specmatic_contract_test(host, port, '', service_contract_file)
 @specmatic_stub(stub_host, stub_port, [expectation_json_file], '', stub_contract_file)
+@start_flask_app(app, host, port)
 class TestApiContract:
     @classmethod
     def teardown_class(cls):
+        cls.flask_server.stop()
         cls.stub.stop()
 
 
