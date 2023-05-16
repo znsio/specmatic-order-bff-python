@@ -16,6 +16,6 @@ pytest==7.3.1
 pytz==2023.3
 requests==2.30.0
 six==1.16.0
-specmatic-python==0.2.2
+specmatic==0.2.3
 urllib3==2.0.2
 Werkzeug==2.3.3
