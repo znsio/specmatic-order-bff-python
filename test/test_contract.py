@@ -14,7 +14,7 @@ service_contract_file = ROOT_DIR + '/test/spec/product-search-bff-api.yaml'
 stub_contract_file = ROOT_DIR + '/test/spec/api_order_v1.yaml'
 
 
-@specmatic_contract_test(host, port, service_contract_file)
+@specmatic_contract_test(host, port)
 @start_flask_app(app, host, port)
 @specmatic_stub(stub_host, stub_port, [expectation_json_file])
 class TestApiContract:
