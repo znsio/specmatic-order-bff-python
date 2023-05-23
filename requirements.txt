@@ -17,6 +17,6 @@ python-dotenv==1.0.0
 pytz==2023.3
 requests==2.30.0
 six==1.16.0
-specmatic==0.3.0
+specmatic==0.4.1
 urllib3==2.0.2
 Werkzeug==2.3.3

@@ -1,6 +1,6 @@
 import pytest
 
-from specmatic.core.decorators import start_flask_app, specmatic_stub, specmatic_contract_test
+from specmatic.core.decorators import start_app, specmatic_stub, specmatic_contract_test
 from api import app
 from definitions import ROOT_DIR
 
@@ -10,18 +10,13 @@ stub_host = "127.0.0.1"
 stub_port = 8080
 specmatic_json_file = ROOT_DIR + '/specmatic.json'
 expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
-service_contract_file = ROOT_DIR + '/test/spec/product-search-bff-api.yaml'
-stub_contract_file = ROOT_DIR + '/test/spec/api_order_v1.yaml'
 
 
-@specmatic_contract_test(host, port)
-@start_flask_app(app, host, port)
-@specmatic_stub(stub_host, stub_port, [expectation_json_file])
+@specmatic_contract_test(ROOT_DIR, host, port)
+@start_app(app, host, port)
+@specmatic_stub(ROOT_DIR, stub_host, stub_port, [expectation_json_file])
 class TestApiContract:
-    @classmethod
-    def teardown_class(cls):
-        cls.flask_server.stop()
-        cls.stub.stop()
+    pass
 
 
 if __name__ == '__main__':
