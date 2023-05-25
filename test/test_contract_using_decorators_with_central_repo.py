@@ -12,9 +12,9 @@ specmatic_json_file = ROOT_DIR + '/specmatic.json'
 expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
 
 
-@specmatic_contract_test(ROOT_DIR, host, port)
+@specmatic_contract_test(host, port, ROOT_DIR)
 @start_app(app, host, port)
-@specmatic_stub(ROOT_DIR, stub_host, stub_port, [expectation_json_file])
+@specmatic_stub(stub_host, stub_port, ROOT_DIR, [expectation_json_file])
 class TestApiContract:
     pass
 

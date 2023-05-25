@@ -13,14 +13,14 @@ class TestContract:
 stub = None
 app_server = None
 try:
-    stub = Specmatic.start_stub(ROOT_DIR)
+    stub = Specmatic.start_stub(project_root=ROOT_DIR)
     stub.set_expectations([expectation_json_file])
 
     app.config['ORDER_API_HOST'] = stub.host
     app.config['ORDER_API_PORT'] = stub.port
     app_server = Specmatic.start_wsgi_app(app)
 
-    Specmatic.test(ROOT_DIR, TestContract, app_server.host, app_server.port)
+    Specmatic.test(TestContract, app_server.host, app_server.port, ROOT_DIR)
 except Exception as e:
     print(f"Error: {e}")
     raise e
