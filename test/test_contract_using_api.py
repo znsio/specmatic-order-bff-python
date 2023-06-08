@@ -1,8 +1,8 @@
 import pytest
+from specmatic.core.specmatic import Specmatic
+
 from api import app
 from definitions import ROOT_DIR
-from specmatic.core.specmatic import Specmatic
-from specmatic.servers.wsgi_app_server import WSGIAppServer
 
 app_host = "127.0.0.1"
 app_port = 5000
@@ -15,11 +15,12 @@ class TestContract:
     pass
 
 
-app_server = WSGIAppServer(app, app_host, app_port)
 Specmatic() \
     .with_project_root(ROOT_DIR) \
-    .stub(stub_host, stub_port, [expectation_json_file]) \
-    .app(app_server) \
+    .with_stub(stub_host, stub_port, [expectation_json_file]) \
+    .with_app(app) \
+    .with_app_host(app_host) \
+    .with_app_port(app_port) \
     .test(TestContract) \
     .run()
 
