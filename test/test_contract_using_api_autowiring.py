@@ -26,9 +26,7 @@ def reset_app_config(app):
 Specmatic() \
     .with_project_root(ROOT_DIR) \
     .with_stub(expectations=[expectation_json_file]) \
-    .with_app(app) \
-    .with_set_app_config_func(set_app_config) \
-    .with_reset_app_config_func(reset_app_config) \
+    .with_wsgi_app(app, set_app_config_func=set_app_config, reset_app_config_func=reset_app_config) \
     .test(TestContract) \
     .run()
 
