@@ -11,9 +11,9 @@ The purpose of this project is to demonstrate how specmatic can be used to valid
 
 - Install Python 3.11 ( use homebrew if you are on mac os)
 
+- Install JRE 17
 
 - Install pip
-
 
 - Install virtualenv by running:  
   ```pip install virtualenv```
