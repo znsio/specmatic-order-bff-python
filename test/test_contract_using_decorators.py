@@ -1,23 +1,26 @@
 import pytest
+from specmatic.core.decorators import (
+    specmatic_contract_test,
+    specmatic_stub,
+    start_wsgi_app,
+)
 
-from specmatic.core.decorators import start_wsgi_app, specmatic_stub, specmatic_contract_test
 from api import app
 from definitions import ROOT_DIR
+from test import expectation_json_files
 
 host = "127.0.0.1"
 port = 5000
 stub_host = "127.0.0.1"
 stub_port = 8080
-specmatic_json_file = ROOT_DIR + '/specmatic.json'
-expectation_json_file = ROOT_DIR + '/test/data/expectation.json'
 
 
-@specmatic_contract_test(host, port, ROOT_DIR)
+@specmatic_contract_test(host, port, ROOT_DIR)  # type: ignore[reportArgumentType]
 @start_wsgi_app(app, host, port)
-@specmatic_stub(stub_host, stub_port, ROOT_DIR, [expectation_json_file])
+@specmatic_stub(stub_host, stub_port, str(ROOT_DIR), expectation_json_files)
 class TestApiContract:
     pass
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     pytest.main()

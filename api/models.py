@@ -1,32 +1,27 @@
-from db.Orders import Orders
-from db.Products import Products
-from flask_restful import Resource
-from flask import request
-import json
+import enum
+from typing import TypedDict
 
 
-class Product(Resource):
-    def get(self):
-        product_type = request.args.get('type')
-        if product_type is None:
-            return {'message': 'The "type" parameter is mandatory.'}, 400
-
-        response = Products().search(product_type)
-        if response.status_code != 200:
-            return {'message': 'An error occurred while retrieving the products.'}, response.status_code
-
-        product_list = json.loads(response.content)
-
-        products = [{"id": product["id"], "name": product["name"], "type": product["type"], "inventory": product["inventory"]} for product in product_list]
-        return products
+class ProductType(str, enum.Enum):
+    GADGET = "gadget"
+    BOOK = "book"
+    FOOD = "food"
+    OTHER = "other"
 
 
-class Order(Resource):
-    def post(self):
-        order = request.get_json()
-        order["status"] = "pending"
-        response = Orders().create(order)
-        if response.status_code != 200:
-            return {'message': 'An error occurred while creating the order.'}, response.status_code
-        order_response = json.loads(response.content)
-        return {order_response['id']: 'success'}
+class AvailableProductType(TypedDict):
+    type: ProductType | None
+    page_size: int
+
+
+class Product(TypedDict):
+    name: str
+    type: ProductType
+    inventory: int
+    desription: str | None
+
+
+class Order(TypedDict):
+    status: str
+    productid: int
+    count: int
