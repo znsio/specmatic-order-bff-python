@@ -10,6 +10,8 @@ load_dotenv()
 app = Flask(__name__)
 app.config["ORDER_API_HOST"] = os.getenv("ORDER_API_HOST")
 app.config["ORDER_API_PORT"] = os.getenv("ORDER_API_PORT")
+app.config["API_URL"] = f"http://{app.config['ORDER_API_HOST']}:{app.config['ORDER_API_PORT']}"
+app.config["AUTH_TOKEN"] = os.getenv("AUTH_TOKEN") or "API-TOKEN-SPEC"
 app.config["REQ_TIMEOUT"] = os.getenv("REQ_TIMEOUT") or 3000
 
 

@@ -1,25 +1,18 @@
 import pytest
 from specmatic.core.specmatic import Specmatic
 
-from api import app
-from definitions import ROOT_DIR
-from test import expectation_json_files
-
-app_host = "127.0.0.1"
-app_port = 5000
-stub_host = "127.0.0.1"
-stub_port = 8080
+from test import APP, APP_HOST, APP_PORT, ROOT_DIR, STUB_HOST, STUB_PORT, expectation_json_files
 
 
 class TestContract:
     pass
 
 
-Specmatic().with_project_root(ROOT_DIR).with_stub(stub_host, stub_port, expectation_json_files).with_wsgi_app(
-    app,
-    app_host,
-    app_port,
-).test_with_api_coverage_for_flask_app(TestContract, app).run()
+Specmatic().with_project_root(ROOT_DIR).with_stub(STUB_HOST, STUB_PORT, expectation_json_files).with_wsgi_app(
+    APP,
+    APP_HOST,
+    APP_PORT,
+).test_with_api_coverage_for_flask_app(TestContract, APP).run()
 
 if __name__ == "__main__":
     pytest.main()
