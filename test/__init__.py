@@ -17,3 +17,4 @@ STUB_PORT = 8080
 APP = app
 
 os.environ["SPECMATIC_GENERATIVE_TESTS"] = "true"
+os.environ["FILTER"] = "/internal/metrics"
